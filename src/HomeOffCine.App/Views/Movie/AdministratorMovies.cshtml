@@ -1,0 +1,37 @@
+﻿@model PagedViewModel<HomeOffCine.App.ViewModels.MovieViewModel>
+
+<div class="div-main">
+    <h1 class="title">Lista de filmes cadastrados</h1>
+    <div class="content">
+        <form method="get" enctype="multipart/form-data" asp-controller="Movie" asp-action="AdministratorMovies" class="d-flex">
+            <input name="q" value="@ViewBag.Pesquisa" class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit"><span class="fa fa-search"></span></button>
+        </form>
+        <br />
+        <a class="btn btn-dark" asp-controller="Movie" asp-action="AddMovie">
+            Cadastrar novo filme
+            <span class="fa fa-add"></span>
+        </a>
+        <br />
+        <br />
+        @if (Model.List.Any())
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <partial name="_ListMovies">
+                    <vc:paginacao modelo-paginado="@Model"></vc:paginacao>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div style="margin-top=10px;">
+                <div class="alert alert-info" role="alert">
+                    <p style="text-align:center;">
+                        <span class="fa fa-info"></span> Nenhum filme adicionado
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

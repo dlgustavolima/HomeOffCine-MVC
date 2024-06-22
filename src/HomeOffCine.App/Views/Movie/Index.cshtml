@@ -1,0 +1,54 @@
+﻿@model PagedViewModel<HomeOffCine.App.ViewModels.MovieViewModel>
+
+@{
+    ViewData["Title"] = "Movies Page";
+}
+
+<div class="div-main">
+    <div class="content">
+        <div class="text-center">
+            @if (Model.List.Any())
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="background-color:#050505; padding:3px; border-radius: 5px;">
+                            <div style="text-align:center;">
+                                <p style="color:white; margin-top: 10px;"> Lançamento</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="listagem">
+                            @foreach (var item in Model.List.OrderByDescending(m => m.ReleaseDate))
+                            {
+                                <div class="item">
+                                    <a asp-controller="movie" asp-action="WatchMovie" asp-route-id="@item.Id" title="@item.Name">
+                                        <div class="imagem">
+                                            <img src="~/images/@item.Image" alt="@item.Image" width="180" height="240" class="img-responsive">
+                                        </div>
+                                        <div class="titulo"><span>@item.Name</span></div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <vc:paginacao modelo-paginado="@Model"></vc:paginacao>
+            }
+            else
+            {
+                <div style="margin-top=10px;">
+                    <div class="alert alert-info" role="alert">
+                        <p style="text-align:center;">
+                             Nenhum filme encontrado
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

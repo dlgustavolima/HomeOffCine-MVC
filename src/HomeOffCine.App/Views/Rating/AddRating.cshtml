@@ -1,0 +1,46 @@
+﻿@model HomeOffCine.App.ViewModels.RatingViewModel
+
+@{
+    ViewData["Title"] = "Adicionar avalição";
+
+    var movieId = ViewBag.MovieId;
+}
+
+<h1>Adicionar avalição</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="AddRating">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MovieId" value="@movieId" />
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assessments" class="control-label"></label>
+                <input asp-for="Assessments" class="form-control" />
+                <span asp-validation-for="Assessments" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RatingDate" class="control-label"></label>
+                <input asp-for="RatingDate" class="form-control" />
+                <span asp-validation-for="RatingDate" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-dark" />
+                <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,48 @@
+﻿@model HomeOffCine.App.ViewModels.MovieViewModel
+
+@{
+    var rating = new RatingViewModel();
+}
+
+<div class="content">
+    <h4 style="text-align: center;">Avaliações</h4>
+    <div class="row justify-content-center">
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <form method="post" enctype="multipart/form-data" asp-controller="rating" asp-action="AddRating">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <br />
+                    <input type="hidden" name="MovieId" value="@Model.Id" />
+                    <div class="mb-3">
+                        <textarea class="form-control" name="Description" rows="3" placeholder="Deixe seu comentario"></textarea>
+                        <span asp-validation-for="@rating.Description" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <input type="range" class="form-range" min="0" max="10" id="customRange2" name="Assessments">
+                        <span asp-validation-for="@rating.Assessments" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-dark btn-lg w-100" type="submit">Avaliar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br />
+        <div class="col-md-8">
+            @foreach (var item in Model.Ratings)
+            {
+                <div class="p-3 bg-dark bg-opacity-10 border border-dark rounded-end">
+                    <dl class="row">
+                        <dt class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </dt>
+                        <dt class="col-sm-2">
+                            <a class="btn btn-danger" asp-controller="Rating" asp-action="DeleteRating" asp-route-ratingId="@item.Id"><spam class="fa fa-trash"></spam> </a>
+                        </dt>
+                    </dl>
+                </div>
+                <br />
+            }
+        </div>
+    </div>
+</div>

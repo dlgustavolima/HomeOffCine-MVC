@@ -1,0 +1,84 @@
+﻿@model HomeOffCine.App.ViewModels.MovieViewModel
+
+<div class="content">
+    <div class="row">
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100 rounded" src="~/images/@Model.ImageBanner" alt="@Model.ImageBanner" height="400" />
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+        <br />
+        <br />
+        <div class="col-md-4">
+            <dl class="row">
+                <dd class="col-sm-12">
+                    @if (!string.IsNullOrEmpty(Model.Image))
+                    {
+                        <td class="col-md-3">
+                            <figure class="figure">
+                                <img src="~/images/@Model.Image" alt="@Model.Image" class="figure-img rounded" style="width: 380px; height: 442px" />
+                            </figure>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                        </td>
+                    }
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-8 watch-movies-infos">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dt class="col-sm-8">
+                    @Html.DisplayFor(model => model.Name)
+                </dt>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Gender)
+                </dt>
+                <dt class="col-sm-8">
+                    @Html.DisplayFor(model => model.Gender)
+                </dt>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Imdb)
+                </dt>
+                <dt class="col-sm-8">
+                    @Html.DisplayFor(model => model.Imdb)
+                </dt>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.MediaRating)
+                </dt>
+                <dt class="col-sm-8">
+                    @Html.DisplayFor(model => model.MediaRating)
+                </dt>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </dt>
+                <dt class="col-sm-8">
+                    @Model.ReleaseDate.ToString("dd/MM/yyyy")
+                </dt>
+            </dl>
+            <dl class="row">
+                <dd class="col-sm-12">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </dl>
+            @if (!string.IsNullOrEmpty(@Model.UrlTrailer))
+            {
+                <div class="ratio ratio-21x9">
+                    <iframe src="@Model.UrlTrailer" title="YouTube video" allowfullscreen></iframe>
+                </div>
+            }
+        </div>
+    </div>
+    <hr />
+    <br />
+
+    <partial name="_RatingMovie">
+</div>

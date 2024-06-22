@@ -1,0 +1,15 @@
+Anotações de comandos Kubernetes
+
+Iniciar minikube
+
+--Precisa rodar o docker para isso
+minikube start 
+
+--Rodar o arquivo yaml para criar o pod e a base de dados
+kubectl create -f /home/dlgustavolima/homeoffcine/database.yaml
+kubectl create -f /home/dlgustavolima/homeoffcine/pod.yaml
+
+--Para testar utilizamos o port-forward que é para que possamos acessar o nosso pod através de uma porta
+kubectl port-forward pod/homeoffcine 8080:8080
+
+

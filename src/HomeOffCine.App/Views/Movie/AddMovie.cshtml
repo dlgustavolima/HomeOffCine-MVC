@@ -1,0 +1,120 @@
+﻿@model HomeOffCine.App.ViewModels.MovieViewModel
+
+@{
+    ViewData["Title"] = "Adicionar filme";
+}
+
+<h4 style="text-align: center;">Adicionar filme</h4>
+
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <vc:Summary></vc:Summary>
+        <form enctype="multipart/form-data" asp-action="AddMovie">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea cols="40" rows="5" asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" class="form-select">
+                    <option value="Gender" label="Escolha um genero" selected></option>
+                    <option value="Acao" label="Ação"></option>
+                    <option value="Aventura" label="Aventura"></option>
+                    <option value="Comedia" label="Comédia Romântica"></option>
+                    <option value="Crime" label="Crime"></option>
+                    <option value="Documentario" label="Documentário"></option>
+                    <option value="Drama" label="Drama"></option>
+                    <option value="Familia" label="Família"></option>
+                    <option value="Fantasia" label="Fantasia"></option>
+                    <option value="Faroeste" label="Faroeste"></option>
+                    <option value="Ficcao" label="Ficção Científica"></option>
+                    <option value="Guerra" label="Guerra"></option>
+                    <option value="Historia" label="História"></option>
+                    <option value="Misterio" label="Mistério"></option>
+                    <option value="Musical" label="Musical"></option>
+                    <option value="Policial" label="Policial"></option>
+                    <option value="Romance" label="Romance"></option>
+                    <option value="Suspense" label="Suspense"></option>
+                    <option value="Terror" label="Terror"></option>
+                    <option value="Thriller" label="Thriller"></option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Imdb" class="control-label"></label>
+                <input asp-for="Imdb" class="form-control" />
+                <span asp-validation-for="Imdb" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="UrlTrailer" class="control-label"></label>
+                <input asp-for="UrlTrailer" class="form-control" />
+                <span asp-validation-for="UrlTrailer" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="ReleaseDate" class="control-label"></label>
+                <input asp-for="ReleaseDate" class="form-control" />
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="ImagemUpload" asp-for="ImagemUpload">
+                    <label data-browse="Procurar" style="width: 400px" class="custom-file-label" for="ImagemUpload"></label>
+                    <label style="display: none" id="img_nome"></label>
+                </div>
+                <span asp-validation-for="ImagemUpload" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="ImageBannerUpload" asp-for="ImageBannerUpload">
+                    <label data-browse="Procurar" style="width: 400px" class="custom-file-label" for="ImageBannerUpload"></label>
+                    <label style="display: none" id="imgBanner"></label>
+                </div>
+                <span asp-validation-for="ImageBannerUpload" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-dark" />
+                <a class="btn btn-info" asp-action="AdministratorMovies">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $("#ImagemUpload").change(function () {
+            $("#img_nome").text(this.files[0].name);
+            $("#img_nome")[0].style.display = 'block';
+        });
+
+        $("#ImagemUpload").attr("data-val", "true");
+        $("#ImagemUpload").attr("data-val-required", "Preencha o campo Imagem");
+
+        $("#ImageBannerUpload").change(function () {
+            $("#imgBanner_nome").text(this.files[0].name);
+            $("#imgBanner_nome")[0].style.display = 'block';
+        });
+
+        $("#ImageBannerUpload").attr("data-val", "true");
+        $("#ImageBannerUpload").attr("data-val-required", "Preencha o campo Imagem");
+    </script>
+}

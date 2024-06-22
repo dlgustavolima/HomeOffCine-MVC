@@ -1,0 +1,122 @@
+﻿@model PagedViewModel<HomeOffCine.App.ViewModels.MovieViewModel>
+
+@{
+    ViewData["Title"] = "Movies Page";
+    var carouselFirts = true;
+}
+
+
+<div class="content">
+    <div class="text-center">
+        @if (Model.List.Any())
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                        @if (Model.List.Count > 1)
+                        {
+                            <div class="carousel-indicators">
+                                @for (var i = 0; i < Model.List.Count; i++)
+                                {
+                                    if (@i == 0)
+                                    {
+                                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="@i" class="active" aria-current="true" aria-label="Slide @i"></button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="@i" aria-label="Slide @i"></button>
+                                    }
+                                }
+                            </div>
+                        }
+                        <div class="carousel-inner">
+                            @foreach (var item in Model.List)
+                            {
+                                if (carouselFirts == true)
+                                {
+                                    <div class="carousel-item active" data-bs-interval="4000">
+                                        <a asp-controller="movie" asp-action="WatchMovie" asp-route-id="@item.Id" title="@item.Name">
+                                            <img src="~/images/@item.ImageBanner" alt="@item.ImageBanner" height="400" class="d-block w-100 rounded">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>@item.Name</h5>
+                                                <p>@item.Description</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="carousel-item" data-bs-interval="4000">
+                                        <a asp-controller="movie" asp-action="WatchMovie" asp-route-id="@item.Id" title="@item.Name">
+                                            <img src="~/images/@item.ImageBanner" alt="@item.ImageBanner" height="400" class="d-block w-100 rounded">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>@item.Name</h5>
+                                                <p>@item.Description</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+
+                                carouselFirts = false;
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="background-color:#050505; padding:3px; border-radius: 5px;">
+                        <div style="text-align:center;">
+                            <p style="color:white; margin-top: 10px;"> Lançamento</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="listagem">
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            @foreach (var item in Model.List.OrderBy(m => m.MediaRating))
+                            {
+                                <div class="col">
+                                    <a asp-controller="movie" asp-action="WatchMovie" asp-route-id="@item.Id" title="@item.Name">
+                                        <div class="card h-100">
+                                            <img src="~/images/@item.Image" alt="@item.Image" class="card-img-top">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@item.Name</h5>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <vc:paginacao modelo-paginado="@Model"></vc:paginacao>
+        }
+        else
+        {
+            <div style="margin-top=10px;">
+                <div class="alert alert-info" role="alert">
+                    <p style="text-align:center;">
+                        Nenhum filme encontrado
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

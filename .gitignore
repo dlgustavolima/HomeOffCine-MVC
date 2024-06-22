@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/test/HomeOffCine.Tests/bin/Debug/net8.0
+/test/HomeOffCine.Tests/obj
+/src/HomeOffCine.App/bin/Debug/net8.0
+/src/HomeOffCine.App/obj
+/src/HomeOffCine.Business/bin/Debug/net8.0
+/src/HomeOffCine.Business/obj
+/src/HomeOffCine.Infra/bin/Debug/net8.0
+/src/HomeOffCine.Infra/obj
+/.vs
