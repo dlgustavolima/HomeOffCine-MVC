@@ -11,3 +11,4 @@
 /src/HomeOffCine.Infra/bin/Debug/net8.0
 /src/HomeOffCine.Infra/obj
 /.vs
+/test/HomeOffCine.Tests/bin/Release/net8.0/CoverletSourceRootsMapping_HomeOffCine.Tests
