@@ -1,57 +1,57 @@
 name: Build project
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
-        branches:
-            - main
-   
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
 
-    versionamento:
-      runs-on: ubuntu-latest
-      outputs:
-        versao: ${{ steps.get-version.outputs.versao }}
-        docker-container-registry: ${{ steps.docker-image-registry.outputs.docker-container-registry }}
+  versionamento:
+    runs-on: ubuntu-latest
+    name: Versionamento
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch_depth: 0
 
-      steps:
-        - uses: actions/download-artifact@v4
-          with:
-            name: versao
-            path: ./
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-            run-id: ${{ github.event.workflow_run.id }}
+      - uses: codacy/git-version@2.8.0
+        id: version
+        with:
+            release-branch: main
+            prefix: v
 
-        - name: Get version from file
-          id: get-version        
-          run: |
-            VALUE=$(cat ./versao.txt)
-            echo "::notice:: $VALUE"
-            echo "versao=$VALUE" >> "$GITHUB_OUTPUT"
+      - name: Tag do repositorio
+        env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "::notice:: ${{ steps.version.outputs.version }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+          git tag -a ${{ steps.version.outputs.version }} -m "Release ${{ steps.version.outputs.version }}"
+          git push --tags
+        if: github.ref == 'refs/head/main'
+        
 
-        - name: Generate docker image registry
-          id: docker-image-registry
-          run: |           
-             echo "docker-container-registry=${{ vars.DOCKER_CONTAINER_REGISTRY }}/${{ vars.DOCKERHUB_REPOSITORY }}:${{ steps.get-version.outputs.versao }}" >> "$GITHUB_OUTPUT"
-
-    build:
-        runs-on: ubuntu-latest
-        name: Build Project
-
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            - name: Setup .NET Core
-              uses: actions/setup-dotnet@v4
-              with:
-                dotnet-verion: '8.x'
-                cache: true
-                cache-dependency-path: ./src/HomeOffCine.App/packages.lock.json
-
-            - name: Build
-              run: |
-                  dotnet restore ./HomeOffCine.sln
-                  dotnet build --no-restore ./HomeOffCine.sln
+  build:
+    runs-on: ubuntu-latest
+    name: Build Project
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-verion: 8.x
+          cache: true
+          cache-dependency-path: ./src/HomeOffCine.App/packages.lock.json
+      - name: Build
+        run: |
+          dotnet restore ./HomeOffCine.sln
+          dotnet build --no-restore ./HomeOffCine.sln
