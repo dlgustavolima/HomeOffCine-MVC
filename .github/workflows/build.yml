@@ -9,6 +9,33 @@ on:
             - main
    
 jobs:
+
+    versionamento:
+      runs-on: ubuntu-latest
+      outputs:
+        versao: ${{ steps.get-version.outputs.versao }}
+        docker-container-registry: ${{ steps.docker-image-registry.outputs.docker-container-registry }}
+
+      steps:
+        - uses: actions/download-artifact@v4
+          with:
+            name: versao
+            path: ./
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            run-id: ${{ github.event.workflow_run.id }}
+
+        - name: Get version from file
+          id: get-version        
+          run: |
+            VALUE=$(cat ./versao.txt)
+            echo "::notice:: $VALUE"
+            echo "versao=$VALUE" >> "$GITHUB_OUTPUT"
+
+        - name: Generate docker image registry
+          id: docker-image-registry
+          run: |           
+             echo "docker-container-registry=${{ vars.DOCKER_CONTAINER_REGISTRY }}/${{ vars.DOCKERHUB_REPOSITORY }}:${{ steps.get-version.outputs.versao }}" >> "$GITHUB_OUTPUT"
+
     build:
         runs-on: ubuntu-latest
         name: Build Project
