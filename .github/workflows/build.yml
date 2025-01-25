@@ -60,8 +60,8 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release ./HomeOffCine.sln
 
-      - name: Test
-        run: dotnet test --no-build --no-restore --project ./test/HomeOffCine.Tests/HomeOffCine.Tests.csproj --configuration Release --logger trx --results-directory "TestResult"
+      - name: Run Unit Tests
+        run: dotnet test --no-build --no-restore --configuration Release --logger trx --results-directory TestResults "./test/HomeOffCine.Tests/HomeOffCine.Tests.csproj"
 
       - uses: actions/upload-artifact@v4
         with:
