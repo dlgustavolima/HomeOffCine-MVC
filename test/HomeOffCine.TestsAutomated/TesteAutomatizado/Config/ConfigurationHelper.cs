@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace HomeOffCine.Tests.TesteAutomatizado.Config;
+namespace HomeOffCine.TestsAutomated.TesteAutomatizado.Config;
 
 public class ConfigurationHelper
 {

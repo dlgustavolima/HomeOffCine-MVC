@@ -12,3 +12,5 @@
 /src/HomeOffCine.Infra/obj
 /.vs
 /test/HomeOffCine.Tests/bin/Release/net8.0/CoverletSourceRootsMapping_HomeOffCine.Tests
+/test/HomeOffCine.TestsAutomated/bin/Debug/net8.0
+/test/HomeOffCine.TestsAutomated/obj

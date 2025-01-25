@@ -29,7 +29,7 @@ jobs:
 
       - name: Tag do repositorio
         env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "::notice:: ${{ steps.version.outputs.version }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
@@ -40,18 +40,30 @@ jobs:
         
 
   build:
+    needs: versionamento
     runs-on: ubuntu-latest
     name: Build Project
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-verion: 8.x
           cache: true
           cache-dependency-path: ./src/HomeOffCine.App/packages.lock.json
+
+      - name: Restore
+        run: dotnet restore ./HomeOffCine.sln
+
       - name: Build
-        run: |
-          dotnet restore ./HomeOffCine.sln
-          dotnet build --no-restore ./HomeOffCine.sln
+        run: dotnet build --no-restore --configuration Release ./HomeOffCine.sln
+
+      - name: Run Unit Tests
+        run: dotnet test --no-build --no-restore --configuration Release --logger trx --results-directory TestResults "./test/HomeOffCine.Tests/HomeOffCine.Tests.csproj"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-test-results
+          path: TestResults

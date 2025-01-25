@@ -1,4 +1,4 @@
-﻿namespace HomeOffCine.Tests.TesteAutomatizado.User
+﻿namespace HomeOffCine.TestsAutomated.TesteAutomatizado.User
 {
     public class User
     {

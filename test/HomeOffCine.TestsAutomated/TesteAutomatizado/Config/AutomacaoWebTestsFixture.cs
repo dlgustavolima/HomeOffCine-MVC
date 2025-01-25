@@ -1,7 +1,6 @@
 ﻿using Bogus;
-using Reqnroll;
 
-namespace HomeOffCine.Tests.TesteAutomatizado.Config;
+namespace HomeOffCine.TestsAutomated.TesteAutomatizado.Config;
 
 [CollectionDefinition(nameof(AutomacaoWebFixtureCollection))]
 public class AutomacaoWebFixtureCollection : ICollectionFixture<AutomacaoWebTestsFixture> { }
@@ -17,7 +16,7 @@ public class AutomacaoWebTestsFixture
     {
         Usuario = new User.User();
         Configuration = new ConfigurationHelper();
-        BrowserHelper = new SeleniumHelper("Chrome", Configuration, false);
+        BrowserHelper = new SeleniumHelper("Chrome", Configuration, true);
     }
 
     public void GerarDadosUsuario()

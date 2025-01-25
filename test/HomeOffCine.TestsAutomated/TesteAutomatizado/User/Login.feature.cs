@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace HomeOffCine.Tests.TesteAutomatizado.User
+namespace HomeOffCine.TestsAutomated.TesteAutomatizado.User
 {
     using Reqnroll;
     using System;

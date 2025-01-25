@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeOffCine.Infra", "src\Ho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeOffCine.Tests", "test\HomeOffCine.Tests\HomeOffCine.Tests.csproj", "{5BDBC987-CC0C-4CAA-9B2A-C0DEA5300922}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeOffCine.TestsAutomated", "test\HomeOffCine.TestsAutomated\HomeOffCine.TestsAutomated.csproj", "{16591024-A351-4280-8224-A222821ADAA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5BDBC987-CC0C-4CAA-9B2A-C0DEA5300922}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BDBC987-CC0C-4CAA-9B2A-C0DEA5300922}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BDBC987-CC0C-4CAA-9B2A-C0DEA5300922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16591024-A351-4280-8224-A222821ADAA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16591024-A351-4280-8224-A222821ADAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16591024-A351-4280-8224-A222821ADAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16591024-A351-4280-8224-A222821ADAA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
