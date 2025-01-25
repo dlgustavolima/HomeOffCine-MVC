@@ -1,6 +1,6 @@
-﻿using HomeOffCine.Tests.TesteAutomatizado.Config;
+﻿using HomeOffCine.TestsAutomated.TesteAutomatizado.Config;
 
-namespace HomeOffCine.Tests.TesteAutomatizado.User;
+namespace HomeOffCine.TestsAutomated.TesteAutomatizado.User;
 
 public abstract class BaseUserTela : PageObjectModel
 {

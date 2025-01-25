@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 
-namespace HomeOffCine.Tests.TesteAutomatizado.Config;
+namespace HomeOffCine.TestsAutomated.TesteAutomatizado.Config;
 
 public static class WebDriverFactory
 {

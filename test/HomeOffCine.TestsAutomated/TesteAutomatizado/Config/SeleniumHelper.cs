@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
-namespace HomeOffCine.Tests.TesteAutomatizado.Config;
+namespace HomeOffCine.TestsAutomated.TesteAutomatizado.Config;
 
 public class SeleniumHelper : IDisposable
 {

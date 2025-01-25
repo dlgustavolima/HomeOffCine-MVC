@@ -1,7 +1,6 @@
 ﻿using Bogus;
-using Reqnroll;
 
-namespace HomeOffCine.Tests.TesteAutomatizado.Config;
+namespace HomeOffCine.TestsAutomated.TesteAutomatizado.Config;
 
 [CollectionDefinition(nameof(AutomacaoWebFixtureCollection))]
 public class AutomacaoWebFixtureCollection : ICollectionFixture<AutomacaoWebTestsFixture> { }

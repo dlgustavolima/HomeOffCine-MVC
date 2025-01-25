@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using HomeOffCine.Tests.TesteAutomatizado.Config;
+using HomeOffCine.TestsAutomated.TesteAutomatizado.Config;
 using Reqnroll;
 
-namespace HomeOffCine.Tests.TesteAutomatizado.User
+namespace HomeOffCine.TestsAutomated.TesteAutomatizado.User
 {
     [Binding]
     [CollectionDefinition(nameof(AutomacaoWebFixtureCollection))]

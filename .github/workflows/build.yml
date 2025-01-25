@@ -60,16 +60,8 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release ./HomeOffCine.sln
 
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get install -f -y
-          google-chrome --version
-
       - name: Test
-        run: dotnet test --no-build --no-restore ./HomeOffCine.sln --configuration Release --logger trx --results-directory "TestResult"
+        run: dotnet test --no-build --no-restore --project ./test/HomeOffCine.Tests/HomeOffCine.Tests.csproj --configuration Release --logger trx --results-directory "TestResult"
 
       - uses: actions/upload-artifact@v4
         with:
