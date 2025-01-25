@@ -17,7 +17,7 @@ public class AutomacaoWebTestsFixture
     {
         Usuario = new User.User();
         Configuration = new ConfigurationHelper();
-        BrowserHelper = new SeleniumHelper("Chrome", Configuration, false);
+        BrowserHelper = new SeleniumHelper("Chrome", Configuration, true);
     }
 
     public void GerarDadosUsuario()

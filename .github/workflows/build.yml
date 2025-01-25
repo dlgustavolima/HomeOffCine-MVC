@@ -59,9 +59,33 @@ jobs:
 
       - name: Build
         run: dotnet build --no-restore --configuration Release ./HomeOffCine.sln
+      
+      - name: Start the site
+        run: dotnet run --no-build --no-restore --project ./src/HomeOffCine.App/HomeOffCine.App.csproj --urls "https://localhost:7280" &
+        env:
+          ASPNETCORE_ENVIRONMENT: Development
+
+      - name: Wait for the site to start
+        run: |
+          for i in {1..30}; do
+            if curl --insecure --fail https://localhost:7280; then
+              echo "Site is up!"
+              break
+            fi
+            echo "Waiting for site to be available..."
+            sleep 2
+          done
+
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get install -f -y
+          google-chrome --version
 
       - name: Test
-        run: dotnet build --no-build --no-restore ./HomeOffCine.sln --configuration Release --logger trx --results-directory "TestResult"
+        run: dotnet test --no-build --no-restore ./HomeOffCine.sln --configuration Release --logger trx --results-directory "TestResult"
 
       - uses: actions/upload-artifact@v4
         with:

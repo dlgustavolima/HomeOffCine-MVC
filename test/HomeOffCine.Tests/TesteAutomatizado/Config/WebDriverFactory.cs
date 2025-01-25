@@ -22,8 +22,14 @@ public static class WebDriverFactory
                 break;
             case "Chrome":
                 var options = new ChromeOptions();
-                if (headless)
+                if (headless) 
+                {
                     options.AddArgument("--headless");
+                    options.AddArgument("--disable-gpu");
+                    options.AddArgument("--no-sandbox");
+                    options.AddArgument("--disable-dev-shm-usage");
+                    options.AddArgument("--ignore-certificate-errors");
+                }
 
                 webDriver = new ChromeDriver(caminhoDriver, options);
 
