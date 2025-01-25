@@ -60,25 +60,6 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release ./HomeOffCine.sln
 
-      - name: Publish the app
-        run: dotnet publish ./src/HomeOffCine.App/HomeOffCine.App.csproj --configuration Release --output ./publish
-      
-      - name: Start the site
-        run: ./publish/HomeOffCine.App --urls "https://localhost:7280" &
-        env:
-          ASPNETCORE_ENVIRONMENT: Development
-
-      - name: Wait for the site to start
-        run: |
-          for i in {1..30}; do
-            if curl --insecure --fail https://localhost:7280; then
-              echo "Site is up!"
-              break
-            fi
-            echo "Waiting for site to be available..."
-            sleep 2
-          done
-
       - name: Install Chrome
         run: |
           sudo apt-get update
