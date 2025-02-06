@@ -104,3 +104,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/dependency-review-action@v4
+
+  code-security-check:
+    needs: versionamento
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: github/codeql-action/init@v3
+        name: Initialize CodeQL
+        with:
+          languages: csharp
+          build-mode: autobuild
+
+      - uses: github/codeql-action/analyze@v3
+        name: Initialize CodeQL
+        with:
+          category: "/language:csharp"
