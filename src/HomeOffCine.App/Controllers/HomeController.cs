@@ -23,7 +23,7 @@ namespace HomeOffCine.App.Controllers
             _movieService = movieService;
             _mapper = mapper;
             _logger = logger;
-            
+
         }
 
         [Route("Index")]

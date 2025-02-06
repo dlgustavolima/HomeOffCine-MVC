@@ -55,9 +55,9 @@ public class MovieController : BaseController
         return View(movieViewModel);
     }
 
-    
+
     [Route("lista-de-filmes")]
-    
+
     public async Task<IActionResult> Index([FromQuery] int ps = 8, [FromQuery] int page = 1, [FromQuery] string q = null, [FromQuery] string g = null)
     {
         var movies = await _movieService.GetMoviesPagination(ps, page, q, g);

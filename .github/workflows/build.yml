@@ -61,6 +61,9 @@ jobs:
       - name: Restore
         run: dotnet restore ./HomeOffCine.sln
 
+      - name: Run dotnet format
+        run: dotnet format --verify-no-changes ./HomeOffCine.sln
+
       - name: Build
         run: dotnet build --no-restore --configuration Release ./HomeOffCine.sln
 
@@ -88,5 +91,4 @@ jobs:
           DEFAULT_BRANCH: "main"
           VALIDATE_ALL_CODEBASE: "false"
           VALIDATE_YAML: "true"
-          VALIDATE_CSHARP: "true"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -25,7 +25,7 @@ public class MovieTests
 
     [Fact(DisplayName = "Novo filme valido")]
     [Trait("Categoria", "HomeOffCine - Movie")]
-    public void Movie_NewMovie_HasBeValid() 
+    public void Movie_NewMovie_HasBeValid()
     {
         // Arrange
         var movie = _movieTestsFixture.GenerateValidMovie();
@@ -44,7 +44,7 @@ public class MovieTests
     {
         // Arrange
         var movie = _movieTestsFixture.GenerateInvalidMovie();
-        
+
         // Act
         var result = movie.Validate();
 

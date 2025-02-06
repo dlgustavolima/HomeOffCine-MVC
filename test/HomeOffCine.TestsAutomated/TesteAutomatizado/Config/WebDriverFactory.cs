@@ -22,7 +22,7 @@ public static class WebDriverFactory
                 break;
             case "Chrome":
                 var options = new ChromeOptions();
-                if (headless) 
+                if (headless)
                 {
                     options.AddArgument("--headless");
                     options.AddArgument("--disable-gpu");

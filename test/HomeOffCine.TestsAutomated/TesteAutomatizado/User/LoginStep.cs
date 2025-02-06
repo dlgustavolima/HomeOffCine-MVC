@@ -40,7 +40,7 @@ public class LoginStep
     public void WhenOUsuarioPreencherOFormulario(DataTable dataTable)
     {
         // Arrange
-        var usuario = new User 
+        var usuario = new User
         {
             Email = "teste@teste.com.br",
             Password = "Teste@123"
