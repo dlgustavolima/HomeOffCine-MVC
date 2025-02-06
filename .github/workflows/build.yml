@@ -62,7 +62,7 @@ jobs:
         run: dotnet restore ./HomeOffCine.sln
 
       - name: Run dotnet format
-        run: dotnet format --verify-no-changes
+        run: dotnet format --verify-no-changes ./HomeOffCine.sln
 
       - name: Build
         run: dotnet build --no-restore --configuration Release ./HomeOffCine.sln
