@@ -6,7 +6,7 @@ public class LoginTela : BaseUserTela
 {
     public LoginTela(SeleniumHelper helper) : base(helper) { }
 
-    public void ClicarEmLogin() 
+    public void ClicarEmLogin()
     {
         Helper.ClicarBotaoPorId("login");
     }
@@ -16,7 +16,7 @@ public class LoginTela : BaseUserTela
         Helper.ClicarBotaoPorId("login-submit");
     }
 
-    public void PreencherFormularioLogin(User usuario) 
+    public void PreencherFormularioLogin(User usuario)
     {
         Helper.PreencherTextBoxPorId("Input_Email", usuario.Email);
         Helper.PreencherTextBoxPorId("Input_Password", usuario.Password);

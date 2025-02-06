@@ -6,7 +6,7 @@ namespace HomeOffCine.TestsAutomated.TesteAutomatizado.User
 {
     [Binding]
     [CollectionDefinition(nameof(AutomacaoWebFixtureCollection))]
-    public class Commom 
+    public class Commom
     {
         private readonly AutomacaoWebTestsFixture _testsFixture;
         private readonly AdicionarNovoUsuarioTela _adicionarNovoUsuarioTela;

@@ -9,7 +9,7 @@ public class RatingRepository : Repository<Rating>, IRatingRepository
 {
     public RatingRepository(HomeOffCineDbContext context) : base(context)
     {
-        
+
     }
 
     public async Task<Rating> GetRatingByIdNoTracking(Guid id)

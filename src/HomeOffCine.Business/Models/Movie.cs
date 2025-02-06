@@ -40,7 +40,7 @@ public class Movie : Entity
         ImageBanner = imageBanner;
         UrlTrailer = urlTrailer;
         _rating = new List<Rating>();
-        
+
     }
 
     public Movie() { }
