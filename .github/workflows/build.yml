@@ -161,11 +161,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ vars.DOCKERHUB_REPOSITORY }}:${{ env.version }} -f ./src/HomeOffCine.App/Dockerfile ./src
+          docker build -t ${{ vars.DOCKERHUB_REPOSITORY }}/homeoffcine-mvc:${{ env.version }} -f ./src/HomeOffCine.App/Dockerfile ./src
 
       - name: Tag Docker Image as Latest
         run: |
-          docker tag ${{vars.DOCKERHUB_REPOSITORY}}:${{ env.version }} ${{vars.DOCKERHUB_REPOSITORY}}:latest
+          docker tag ${{vars.DOCKERHUB_REPOSITORY}}/homeoffcine-mvc:${{ env.version }} ${{vars.DOCKERHUB_REPOSITORY}}/homeoffcine-mvc:latest
         if: github.ref == 'refs/heads/main'
 
       - name: Docker Login
