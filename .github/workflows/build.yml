@@ -17,6 +17,9 @@ jobs:
   versionamento:
     runs-on: ubuntu-latest
     name: Versionamento
+
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     
     steps:
       - name: Checkout code
@@ -75,6 +78,15 @@ jobs:
           name: dotnet-test-results
           path: TestResults
 
+      - name: Publish
+        run: dotnet publish ./HomeOffCine.sln --no-restore --no-build --configuration Release --output ./publish
+
+      - name: Upload dotnet artifacts
+        uses: actions/upload-artifact@v4
+        with:
+            name: api
+            path: ./publish
+
   lint:
     needs: versionamento
     runs-on: ubuntu-latest
@@ -131,3 +143,38 @@ jobs:
         name: Initialize CodeQL
         with:
           category: "/language:csharp"
+
+  build-docker-image:
+    needs: [versionamento, build]
+    runs-on: ubuntu-latest
+
+    env:
+      version: ${{ needs.versionamento.outputs.version }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with: 
+          path: app
+          merge-multiple: false
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ${{ vars.DOCKERHUB_REPOSITORY }}/homeoffcine-mvc:${{ env.version }} -f ./src/HomeOffCine.App/Dockerfile ./src
+
+      - name: Tag Docker Image as Latest
+        run: |
+          docker tag ${{vars.DOCKERHUB_REPOSITORY}}/homeoffcine-mvc:${{ env.version }} ${{vars.DOCKERHUB_REPOSITORY}}/homeoffcine-mvc:latest
+        if: github.ref == 'refs/heads/main'
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Docker push
+        run: |
+          docker push --all-tags dlgustavolima/homeoffcine-mvc
+      
